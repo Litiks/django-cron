@@ -18,7 +18,7 @@ Integrate
 ---------
 
 1. Add 'cron' to your settings.INSTALLED_APPS
-2. Add to your cron script:
+2. Add to your cron script::
 
     * * * * *      . /path_to_project/_env/bin/activate; python /path_to_project/code/manage.py cron_frequently > /dev/null
     0 * * * *      . /path_to_project/_env/bin/activate; python /path_to_project/code/manage.py cron_hourly > /dev/null
