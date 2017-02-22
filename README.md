@@ -30,9 +30,12 @@ Integrate
 Usage
 -----
 
-    from cron.signals import cron_daily
-    def myfn():
-        # do something
-    cron_daily.connect(myfn)
-    
+Add signal listeners within your models.py, defining functions that should be run.
+
+```
+from cron.signals import cron_daily
+def myfn():
+    # do something
+cron_daily.connect(myfn)
+``` 
 
