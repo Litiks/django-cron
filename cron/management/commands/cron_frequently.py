@@ -8,7 +8,7 @@ class Command(BaseCommand):
         pass
 
     def handle(self, *args, **options):
-        print "Sending signal for cron_frequently..."
+        print("Sending signal for cron_frequently...")
 
         # It's butt-ugly that this code is here and not within access_log.. but I'm on a deadline!
         try:
@@ -23,4 +23,4 @@ class Command(BaseCommand):
             access_log_context_manager.ip_address = "127.0.0.1"
 
         cron_frequently.send()
-        print "Done."
+        print("Done.")
