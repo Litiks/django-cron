@@ -23,7 +23,7 @@ Integrate
 ```
 * * * * *      . /path_to_project/_env/bin/activate; python /path_to_project/code/manage.py cron_frequently > /dev/null
 0 * * * *      . /path_to_project/_env/bin/activate; python /path_to_project/code/manage.py cron_hourly > /dev/null
-0 * * * *      . /path_to_project/_env/bin/activate; python /path_to_project/code/manage.py cron_daily > /dev/null
+0 0 * * *      . /path_to_project/_env/bin/activate; python /path_to_project/code/manage.py cron_daily > /dev/null
 ```
 
 
