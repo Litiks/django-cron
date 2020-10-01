@@ -1,5 +1,7 @@
+import time
+
 from django.core.management.base import BaseCommand, CommandError
-from cron.signals import cron_daily
+from cron.signals import cron_frequently, cron_hourly, cron_daily
 
 class Command(BaseCommand):
     help = 'Service which triggers signals for business logic.'
