@@ -26,19 +26,26 @@ class Command(BaseCommand):
 
         while True:
             t = time.time()
+            print('triggering cron_frequently...')
             cron_frequently.send()
+            print('triggering cron_frequently. done.')
 
-            minute = (t//60) * 60
+            # minute of the hour
+            minute = (t//60) % 60
+            # hour of the day
+            hour = (t//3600) % 24
 
-            if minute%3600 == 0:
+            if minute == 0:
                 # it's the first minute of the hour
+                print('triggering cron_hourly...')
                 cron_hourly.send()
+                print('triggering cron_hourly. done.')
 
-                hour = (t//3600) * 3600
-                n = 5 * 3600
-                if (hour+n)%86400 == 0:
-                    # it's also the (nth) hour of the day
-                    cron_daily.send()
+            if minute == 5 and hour == 5:
+                # 5:05am (utc?)
+                print('triggering cron_daily...')
+                cron_daily.send()
+                print('triggering cron_daily. done.')
 
             time.sleep(30)
 
