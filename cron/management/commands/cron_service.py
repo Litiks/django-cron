@@ -1,7 +1,7 @@
 import time
 
 from django.core.management.base import BaseCommand, CommandError
-from cron.signals import cron_frequently, cron_hourly, cron_daily
+from cron.signals import cron_frequently, cron_every_5_minutes, cron_hourly, cron_daily
 
 class Command(BaseCommand):
     help = 'Service which triggers signals for business logic.'
@@ -35,14 +35,20 @@ class Command(BaseCommand):
             # hour of the day
             hour = (t//3600) % 24
 
-            if minute == 0:
-                # it's the first minute of the hour
+            if minute % 5 == 0:
+                # it's a multiple of 5
+                print('triggering cron_every_5_minutes...')
+                cron_every_5_minutes.send()
+                print('triggering cron_every_5_minutes. done.')
+
+            if minute == 3:
+                # it's the third minute of the hour
                 print('triggering cron_hourly...')
                 cron_hourly.send()
                 print('triggering cron_hourly. done.')
 
-            if minute == 5 and hour == 5:
-                # 5:05am (utc?)
+            if minute == 8 and hour == 5:
+                # 5:08am (utc?)
                 print('triggering cron_daily...')
                 cron_daily.send()
                 print('triggering cron_daily. done.')

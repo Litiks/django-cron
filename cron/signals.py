@@ -29,5 +29,6 @@ class Signal(object):
         return results
 
 cron_frequently = Signal()
+cron_every_5_minutes = Signal()
 cron_hourly = Signal()
 cron_daily = Signal()

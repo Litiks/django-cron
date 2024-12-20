@@ -1,6 +1,6 @@
 from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_exempt
-from cron.signals import cron_frequently, cron_hourly, cron_daily
+from cron.signals import cron_frequently, cron_every_5_minutes, cron_hourly, cron_daily
 
 """ Note: these views should only be used with something like elastic beanstalk. If you enable them, be sure to make their inclusion conditional to the environment being an EB worker environment. """
 
@@ -21,6 +21,12 @@ def setup_access_logs():
 def process_frequently(request):
     setup_access_logs()
     cron_frequently.send()
+    return HttpResponse("ok")
+
+@csrf_exempt
+def process_every_5_minutes(request):
+    setup_access_logs()
+    cron_every_5_minutes.send()
     return HttpResponse("ok")
 
 @csrf_exempt
